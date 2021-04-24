@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul.tabs {
+            list-style: none;
+            display: flex;
+        }
+
+        ul.tabs>li.tab-link {
+            padding: 6px 10px;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        ul.tabs>li.current {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        div.tab-content {
+            display: none;
+            background: #ededed;
+			padding: 15px;
+        }
+
+        div.current {
+            display: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <ul class="tabs">
+            <li class="tab-link" data-tab="tab-1">Tab One</li>
+            <li class="tab-link" data-tab="tab-2">Tab Two</li>
+            <li class="tab-link" data-tab="tab-3">Tab Three</li>
+            <li class="tab-link" data-tab="tab-4">Tab Four</li>
+        </ul>
+
+        <div id="tab-1" class="tab-content">
+            1
+        </div>
+        <div id="tab-2" class="tab-content">
+            2
+        </div>
+        <div id="tab-3" class="tab-content">
+            3
+        </div>
+        <div id="tab-4" class="tab-content">
+            4
+        </div>
+    </div>
+
+    <script>
+        function changeTab(currentId) {
+            const target = document.querySelector(`[data-tab=${currentId}]`);
+            //clear
+            const tabLinkList = document.querySelectorAll(".tabs .tab-link");
+            const tabContentList = document.querySelectorAll("div.tab-content");
+            tabLinkList.forEach(tabLink => {
+                tabLink.classList.remove('current');
+            });
+            tabContentList.forEach(tabContent => {
+                tabContent.classList.remove('current');
+            });
+            const currentTabId = target.getAttribute('data-tab');
+            const currentTabContent = document.querySelector(`[id=${currentTabId}]`);
+
+            target.classList.add('current');
+            currentTabContent.classList.add('current');
+        }
+        (function () {
+            const tabs = document.querySelector(".tabs");
+            tabs.addEventListener('click', event => {
+                const {
+                    target
+                } = event;
+                changeTab(target.getAttribute('data-tab'));
+            });
+        }())
+        changeTab("tab-1");
+    </script>
+</body>
+
+</html>

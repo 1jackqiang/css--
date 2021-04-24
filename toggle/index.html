@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: antiquewhite;
+        }
+
+        .toggle {
+            width: 100px;
+            height: 30px;
+            position: relative;
+            line-height: 100%;
+            padding: 0px 3px;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .toggle input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .toggle>span.circular {
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            position: absolute;
+            display: inline-block;
+            height: 19px;
+            width: 19px;
+            border-radius: 20px;
+            background-color: yellowgreen;
+            vertical-align: middle;
+            transition: all .4s;
+        }
+
+        .toggle input[type="checkbox"]:checked+span.circular {
+            left: calc(100% - 3px);
+            transform: translateX(-100%) translateY(-50%);
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <label class="toggle" for="toggle">
+        <input type="checkbox" id="toggle">
+        <span class="circular"></span>
+    </label>
+</body>
+
+</html>
