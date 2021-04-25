@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100%;
+        }
+
+        .root {
+            width: 100%;
+            height: 3000px;
+        }
+
+        .main {
+            height: 100%;
+        }
+
+        .go-top {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50px;
+            margin: 10px;
+            font-size: 12px;
+            right: 0px;
+            bottom: 0px;
+            text-align: center;
+            background-color: green;
+            transition: all .4s;
+            border: 1px solid white;
+            outline: none;
+            color: white
+        }
+
+        .go-top:hover {
+            transform: scale(1.2);
+        }
+
+        .hidden {
+            bottom: -100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="root">
+            ll
+        </div>
+    </div>
+    <button class="go-top hidden">
+        顶部
+    </button>
+    <script>
+        // rAF触发锁，必须加锁，多次调用raf，会在一帧中多次触发回调
+        var ticking = false;
+
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(realFunc);
+                ticking = true;
+            }
+        }
+
+        function realFunc() {
+            const goTop = document.querySelector('.go-top');
+            if (window.scrollY > window.innerHeight - 300) {
+                goTop.classList.remove('hidden');
+            } else {
+                goTop.classList.add('hidden');
+            }
+            ticking = false;
+        }
+        // 滚动事件监听
+        window.addEventListener('scroll', onScroll, false);
+        document.querySelector('.go-top').addEventListener('click', () => {
+            window.scroll({
+                top: 0,
+            });
+        });
+    </script>
+</body>
+
+</html>
